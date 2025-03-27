@@ -1,0 +1,50 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+
+:root {
+  --bg-primary: #ffffff;
+  --text-primary: #333333;
+  --card-bg: #ffffff;
+}
+
+
+.dark {
+  --bg-primary: #121212;
+  --text-primary: #f0f0f0;
+  --card-bg: #2a2a2a;
+}
+
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+html.dark {
+  --bg-primary: #121212;
+  --text-primary: #f0f0f0;
+  --card-bg: #2a2a2a;
+}
+
+html.light {
+  --bg-primary: #ffffff;
+  --text-primary: #333333;
+  --card-bg: #ffffff;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
+}

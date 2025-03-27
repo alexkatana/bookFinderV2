@@ -1,0 +1,95 @@
+.bookCard {
+  --bg-color: #ffffff;
+  --text-color: var(--text-primary);
+  --secondary-text: #666666;
+  --border-color: #e1e1e1;
+
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  background-color: var(--card-bg);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none !important;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.bookCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0070f3, #00c6ff);
+  z-index: 1;
+}
+
+:global(.dark) .bookCard {
+  --bg-color: #2a2a2a;
+  --text-color: #f0f0f0;
+  --secondary-text: #cccccc;
+  --border-color: #444444;
+  border-color:#444;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 12px 0 8px 0;
+  color: var(--text-color);
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.authors {
+  font-size: 14px;
+  color: var(--secondary-text);
+  margin: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.authors::before {
+  content: '✍️';
+  font-size: 12px;
+}
+
+.publishedDate {
+  font-size: 13px;
+  color: var(--secondary-text);
+  margin: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.publishedDate::before {
+  content: '📅';
+  font-size: 12px;
+}
+
+.description {
+  font-size: 14px;
+  color: var(--secondary-text);
+  margin-top: 12px;
+}
+
+
+.bookCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+:global(.dark) .bookCard:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .bookCard {
+  --secondary-text: #ccccc;
+  --border-color: #444444;
+}
