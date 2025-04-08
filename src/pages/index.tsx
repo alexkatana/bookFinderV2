@@ -7,56 +7,56 @@ import Spinner from '../components/spinner/spinner';
 import styles from '../styles/Home.module.css';
 
 const Home = () => {
-  const [books, setBooks] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const router = useRouter();
+	const [books, setBooks] = useState<any[]>([]);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState<string | null>(null);
+	const [searchQuery, setSearchQuery] = useState('');
+	const router = useRouter();
 
-  useEffect(() => {
-    const savedResults = sessionStorage.getItem('searchResults');
-    const savedQuery = sessionStorage.getItem('searchQuery');
-    
-    if (savedResults) {
-      setBooks(JSON.parse(savedResults));
-    }
-    if (savedQuery) {
-      setSearchQuery(savedQuery);
-    }
-  }, []);
+	useEffect(() => {
+		const savedResults = sessionStorage.getItem('searchResults');
+		const savedQuery = sessionStorage.getItem('searchQuery');
 
-  const handleSearch = async (query: string) => {
-    if (!query.trim()) return;
+		if (savedResults) {
+			setBooks(JSON.parse(savedResults));
+		}
+		if (savedQuery) {
+			setSearchQuery(savedQuery);
+		}
+	}, []);
 
-    setSearchQuery(query);
-    setLoading(true);
-    setError(null);
+	const handleSearch = async (query: string) => {
+		if (!query.trim()) return;
 
-    try {
-      const response = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=20`
-      );
-      const items = response.data.items || [];
-      setBooks(items);
-      sessionStorage.setItem('searchResults', JSON.stringify(items));
-      sessionStorage.setItem('searchQuery', query);
-    } catch (err) {
-      setError('Ошибка при выполнении запроса');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+		setSearchQuery(query);
+		setLoading(true);
+		setError(null);
 
-  return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>bookfinder by katana</h1>
-      <SearchBar onSearch={handleSearch} initialQuery={searchQuery} />
-      {loading && <Spinner />}
-      {error && <p className={styles.error}>{error}</p>}
-      <BookList books={books} />
-    </div>
-  );
+		try {
+			const response = await axios.get(
+				`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=20`,
+			);
+			const items = response.data.items || [];
+			setBooks(items);
+			sessionStorage.setItem('searchResults', JSON.stringify(items));
+			sessionStorage.setItem('searchQuery', query);
+		} catch (err) {
+			setError('Ошибка при выполнении запроса');
+			console.error(err);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	return (
+		<div className={styles.container}>
+			<h1 className={styles.title}>bookfinder by katana</h1>
+			<SearchBar onSearch={handleSearch} initialQuery={searchQuery} />
+			{loading && <Spinner />}
+			{error && <p className={styles.error}>{error}</p>}
+			<BookList books={books} />
+		</div>
+	);
 };
 
 export default Home;
